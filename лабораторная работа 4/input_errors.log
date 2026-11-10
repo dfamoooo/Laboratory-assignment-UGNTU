@@ -1,0 +1,16 @@
+[2026-11-02 12:24:29] Ошибка: значение меньше нижней границы (1.0).
+[2026-11-02 12:24:42] Ошибка: значение меньше нижней границы (50.0).
+[2026-11-02 12:24:44] Ошибка: значение меньше нижней границы (50.0).
+[2026-11-02 12:24:50] Ошибка: введено не число ('dff').
+[2026-11-02 12:51:10] Ошибка: введено не число ('уаа'). could not convert string to float: 'уаа'
+[2026-11-02 12:55:21] Ошибка: введено не число ('C:\Users\user\AppData\Local\Programs\Python\Python314\python.exe "c:/Users/user/Desktop/labs vs code/Laboratory-assignment-UGNTU/лабораторная работа 4/validation.py"'). could not convert string to float: 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python314\\python.exe "c:/Users/user/Desktop/labs vs code/Laboratory-assignment-UGNTU/лабораторная работа 4/validation.py"'
+[2026-11-02 12:55:33] Ошибка: введено не число ('C:\Users\user\AppData\Local\Programs\Python\Python314\python.exe "c:/Users/user/Desktop/labs vs code/Laboratory-assignment-UGNTU/лабораторная работа 4/validation.py"'). could not convert string to float: 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python314\\python.exe "c:/Users/user/Desktop/labs vs code/Laboratory-assignment-UGNTU/лабораторная работа 4/validation.py"'
+[2026-11-02 12:55:37] Ошибка: введено не число ('ddd'). could not convert string to float: 'ddd'
+[2026-11-02 12:55:40] Ошибка: значение больше верхней границы (500.0).
+[2026-11-02 13:23:59] Ошибка: введено не число ('C:\Users\user\AppData\Local\Programs\Python\Python314\python.exe "c:/Users/user/Desktop/labs vs code/Laboratory-assignment-UGNTU/лабораторная работа 4/operation.py"'). could not convert string to float: 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python314\\python.exe "c:/Users/user/Desktop/labs vs code/Laboratory-assignment-UGNTU/лабораторная работа 4/operation.py"'
+[2026-11-02 13:54:14] Ошибка: введено не число ('вв'). could not convert string to float: 'вв'
+[2026-11-02 13:54:18] Ошибка: введено не число ('в'). could not convert string to float: 'в'
+[2026-11-02 13:54:27] Ошибка: введено не число ('вааа'). could not convert string to float: 'вааа'
+[2026-11-02 13:54:32] Ошибка: значение больше верхней границы (3000.0).
+[2026-11-02 13:54:33] Ошибка: значение меньше нижней границы (50.0).
+[2026-11-02 13:54:34] Ошибка: значение больше верхней границы (3000.0).
