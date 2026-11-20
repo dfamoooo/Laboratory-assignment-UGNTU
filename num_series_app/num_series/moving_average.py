@@ -1,22 +1,32 @@
-from typing import Sequence, List
+"""Скользящие средние: SMA, центрированное MA, EMA + deque-версия и бенчмарк."""
+from __future__ import annotations
+import time
+from collections import deque
+from typing import List, Sequence
 
 
+# ---------------------------------------------------------------------------
+# Валидация окна
+# ---------------------------------------------------------------------------
 def check_window(window: int, n: int) -> None:
     """
     Валидация окна для скользящих средних.
 
     Требования:
-      - window — целое число ≥ 1
-      - window ≤ n (иначе окно больше ряда)
+      - window — целое число >= 1
+      - window <= n (иначе окно больше ряда)
     """
     if not isinstance(window, int):
         raise TypeError("window должен быть целым числом")
     if window < 1:
-        raise ValueError("window должен быть ≥ 1")
+        raise ValueError("window должен быть >= 1")
     if window > n:
         raise ValueError(f"window ({window}) не может быть больше длины ряда ({n})")
 
 
+# ---------------------------------------------------------------------------
+# Простая скользящая средняя (SMA) через бегущую сумму
+# ---------------------------------------------------------------------------
 def simple_moving_average(data: Sequence[float], window: int) -> List[float]:
     """
     Простая скользящая средняя (SMA) через бегущую сумму (O(n)).
@@ -38,6 +48,12 @@ def simple_moving_average(data: Sequence[float], window: int) -> List[float]:
     return result
 
 
+
+
+
+# ---------------------------------------------------------------------------
+# Центрированная скользящая средняя 
+# ---------------------------------------------------------------------------
 def centered_moving_average(data: Sequence[float], window: int) -> List[float]:
     """
     Центрированная скользящая средняя.
@@ -63,12 +79,15 @@ def centered_moving_average(data: Sequence[float], window: int) -> List[float]:
     return result
 
 
+# ---------------------------------------------------------------------------
+# Экспоненциальная скользящая средняя (EMA)
+# ---------------------------------------------------------------------------
 def exponential_moving_average(data: Sequence[float], alpha: float) -> List[float]:
     """
     Экспоненциальная скользящая средняя (EMA).
 
     EMA[0] = data[0]
-    EMA[i] = alpha * data[i] + (1 - alpha) * EMA[i-1], где 0 < alpha ≤ 1
+    EMA[i] = alpha * data[i] + (1 - alpha) * EMA[i-1], где 0 < alpha <= 1
     """
     if not data:
         return []
@@ -85,3 +104,53 @@ def exponential_moving_average(data: Sequence[float], alpha: float) -> List[floa
         prev = ema
 
     return result
+
+
+# ---------------------------------------------------------------------------
+# SMA с использованием deque (двусторонней очереди)
+# ---------------------------------------------------------------------------
+def simple_moving_average_deque(data: Sequence[float], window: int) -> List[float]:
+    """SMA с использованием deque (двусторонней очереди)."""
+    check_window(window, len(data))
+
+    result = []
+    d = deque()
+    running_sum = 0.0
+    for x in data:
+        d.append(x)
+        running_sum += x
+        if len(d) > window:
+            running_sum -= d.popleft()
+        if len(d) == window:
+            result.append(running_sum / window)
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Бенчмарк: сравнение list- и deque-реализаций SMA
+# ---------------------------------------------------------------------------
+def benchmark_moving_average(
+    data: Sequence[float],
+    window: int,
+    repeats: int = 1000,
+) -> dict:
+    """
+    Замеряет среднее время выполнения SMA для реализаций на list и deque.
+    Возвращает словарь с ключами 'list' и 'deque' (время в секундах).
+    """
+    # Проверка корректности окна (выбросит ValueError при необходимости)
+    check_window(window, len(data))
+
+    # Замер для list-реализации (существующая simple_moving_average)
+    t0 = time.perf_counter()
+    for _ in range(repeats):
+        simple_moving_average(data, window)
+    t_list = (time.perf_counter() - t0) / repeats
+
+    # Замер для deque-реализации
+    t0 = time.perf_counter()
+    for _ in range(repeats):
+        simple_moving_average_deque(data, window)
+    t_deque = (time.perf_counter() - t0) / repeats
+
+    return {"list": t_list, "deque": t_deque}
