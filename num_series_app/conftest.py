@@ -1,6 +1,3 @@
-"""Регистрирует корневую директорию проекта в sys.path, чтобы pytest
-всегда находил пакет num_series"""
-
 """Настройка sys.path: pytest видит пакет num_series из корня проекта."""
 import os
 import sys

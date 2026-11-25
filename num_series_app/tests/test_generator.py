@@ -1,9 +1,5 @@
-"""Валидация n (_validate_n), границы значений, детерминированность
-при фиксированном seed."""
-
 """Тесты модуля num_series.generator."""
 import pytest
-
 from num_series.generator import (
     random_series,
     sine_series,

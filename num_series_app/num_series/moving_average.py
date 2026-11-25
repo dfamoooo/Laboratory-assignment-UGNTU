@@ -8,22 +8,16 @@ from typing import List, Sequence
 # ---------------------------------------------------------------------------
 # Валидация окна
 # ---------------------------------------------------------------------------
-def check_window(window: int, n: int) -> None:
-    """
-    Валидация окна для скользящих средних.
-
-    Требования:
-      - window — целое число >= 1
-      - window <= n (иначе окно больше ряда)
-    """
+def check_window(window, n):
+    # Проверяем на bool (в Python True == 1, но окно не может быть True)
+    if isinstance(window, bool):
+        raise ValueError("window должен быть целым числом, а не bool")
     if not isinstance(window, int):
-        raise TypeError("window должен быть целым числом")
+        raise ValueError("window должен быть целым числом")
     if window < 1:
-        raise ValueError("window должен быть >= 1")
+        raise ValueError("window должен быть больше нуля")
     if window > n:
-        raise ValueError(f"window ({window}) не может быть больше длины ряда ({n})")
-
-
+        raise ValueError("window не может быть больше длины данных")
 # ---------------------------------------------------------------------------
 # Простая скользящая средняя (SMA) через бегущую сумму
 # ---------------------------------------------------------------------------
@@ -82,6 +76,7 @@ def centered_moving_average(data: Sequence[float], window: int) -> List[float]:
 # ---------------------------------------------------------------------------
 # Экспоненциальная скользящая средняя (EMA)
 # ---------------------------------------------------------------------------
+
 def exponential_moving_average(data: Sequence[float], alpha: float) -> List[float]:
     """
     Экспоненциальная скользящая средняя (EMA).
@@ -90,7 +85,7 @@ def exponential_moving_average(data: Sequence[float], alpha: float) -> List[floa
     EMA[i] = alpha * data[i] + (1 - alpha) * EMA[i-1], где 0 < alpha <= 1
     """
     if not data:
-        return []
+        raise ValueError("Ряд не может быть пустым")
 
     if not (0 < alpha <= 1):
         raise ValueError("alpha должен быть в диапазоне (0, 1]")

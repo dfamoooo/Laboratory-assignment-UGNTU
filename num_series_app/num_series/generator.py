@@ -1,15 +1,27 @@
 import math
 import random
 from typing import List, Optional, Any
-
-
-def _validate_n(n: Any) -> None:
-    """Проверка, что n — положительное целое число."""
-    # Сначала убедимся, что это вообще похоже на число
-    if not isinstance(n, int) or isinstance(n, bool):
-        raise TypeError(f"n должно быть целым числом (получено: {type(n).__name__})")
+def _validate_n(n) -> None:
+    """Проверяет, что n — положительное целое число."""
+    # 1. Проверка на bool (в Python True == 1, но нам нужен именно int)
+    if isinstance(n, bool):
+        raise ValueError(f"n должно быть положительным целым числом (получено: {n!r}, причина: bool не является int)")
+    
+    # 2. Проверка на float, которые являются целыми (например, 3.0)
+    if isinstance(n, float) and n.is_integer():
+        n = int(n)
+    
+    # 3. Проверка, что это int (после приведения float выше)
+    if not isinstance(n, int):
+        raise ValueError(f"n должно быть положительным целым числом (получено: {n!r}, причина: неверный тип {type(n).__name__})")
+    
+    # 4. Проверка, что n > 0
     if n <= 0:
-        raise ValueError(f"n должно быть положительным целым числом (получено: {n})")
+        raise ValueError(f"n должно быть положительным целым числом (получено: {n!r}, причина: значение <= 0)")
+
+
+
+
 
 
 def _validate_seed(seed: Any) -> Optional[int]:

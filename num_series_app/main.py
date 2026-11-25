@@ -27,7 +27,7 @@ import csv
 import sys
 from typing import List, Optional, Tuple
 
-from num_series import (
+from num_series_app.num_series import (
     random_series, sine_series, trend_series,
     summarize,
     simple_moving_average, centered_moving_average, exponential_moving_average,

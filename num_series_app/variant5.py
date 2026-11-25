@@ -12,7 +12,7 @@ import random
 import sys
 from typing import List
 
-from num_series import (
+from num_series_app.num_series import (
     simple_moving_average,
     simple_moving_average_deque,
     benchmark_moving_average,
